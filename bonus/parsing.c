@@ -6,11 +6,11 @@
 /*   By: mevangel <mevangel@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:58:10 by mevangel          #+#    #+#             */
-/*   Updated: 2023/09/30 01:23:33 by mevangel         ###   ########.fr       */
+/*   Updated: 2023/09/30 01:04:17 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 static int	pass_spaces(char *s)
 {

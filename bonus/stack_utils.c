@@ -6,11 +6,11 @@
 /*   By: mevangel <mevangel@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:23:58 by mevangel          #+#    #+#             */
-/*   Updated: 2023/09/30 01:26:02 by mevangel         ###   ########.fr       */
+/*   Updated: 2023/09/30 01:06:00 by mevangel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 static void	fill_nums_stack_a(t_stack *stack, int num, int *arr)
 {
@@ -23,41 +23,14 @@ static void	fill_nums_stack_a(t_stack *stack, int num, int *arr)
 		error_free_exit(arr, NULL, NULL);
 	}
 	new_node->value = num;
-	new_node->index = 0;
 	new_node->next = stack->head;
 	stack->head = new_node;
 	stack->size++;
 }
 
-static void	sort_int_array(int *nums, int size)
-{
-	int		i;
-	int		tmp;
-	bool	sorting_done;
-
-	tmp = 0;
-	sorting_done = false;
-	while (sorting_done == false)
-	{
-		sorting_done = true;
-		i = -1;
-		while (++i < size - 1)
-		{
-			if (nums[i] > nums[i + 1])
-			{
-				tmp = nums[i];
-				nums[i] = nums[i + 1];
-				nums[i + 1] = tmp;
-				sorting_done = false;
-			}
-		}
-	}
-}
-
 void	initialize_stacks(t_stack *a, t_stack *b, int *arr, int size)
 {
 	int		i;
-	t_node	*step;
 
 	a->head = NULL;
 	b->head = NULL;
@@ -66,47 +39,22 @@ void	initialize_stacks(t_stack *a, t_stack *b, int *arr, int size)
 	i = size;
 	while (--i >= 0)
 		fill_nums_stack_a(a, arr[i], arr);
-	sort_int_array(arr, size);
-	step = a->head;
-	while (step != NULL)
-	{
-		i = -1;
-		while (++i < size)
-		{
-			if (arr[i] == step->value)
-			{
-				step->index = i;
-				break ;
-			}
-		}
-		step = step->next;
-	}
 }
 
-bool	is_sorted(t_node *check)
+void	swap_both(t_stack *stack_a, t_stack *stack_b)
 {
-	if (!check)
-		return (false);
-	while (check->next != NULL)
-	{
-		if (check->value > check->next->value)
-			return (false);
-		check = check->next;
-	}
-	return (true);
+	swap(stack_a);
+	swap(stack_b);
 }
 
-void	free_stack(t_node *to_free)
+void	rotate_both(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node	*move;
+	rotate(stack_a);
+	rotate(stack_b);
+}
 
-	if (!to_free)
-		return ;
-	while (to_free != NULL)
-	{
-		move = to_free->next;
-		free(to_free);
-		to_free = move;
-	}
-	to_free = NULL;
+void	reverse_rotate_both(t_stack *stack_a, t_stack *stack_b)
+{
+	reverse_rotate(stack_a);
+	reverse_rotate(stack_b);
 }
